@@ -391,15 +391,16 @@ class WalletManager:
             if send_amounts:
                 if isinstance(send_amounts[0], str):
                     if key.startswith("reverse_"):
-                        to_addr = self.convert_ascii_to_hex(to_addr)
-                        send_amounts = bytes.fromhex(send_amounts).decode('ascii')
+                        print(f"before convert: {to_addr}")
+                        to_addr_temp = self.convert_ascii_to_hex(to_addr)
+                        send_amounts_temp = bytes.fromhex(send_amounts).decode('ascii')
 
                         print(f"KEY: {key}")
-                        print(f"Amounts: {send_amounts}")
-                        print(f"to_addr: {to_addr}")
+                        print(f"Amounts: {send_amounts_temp}")
+                        print(f"to_addr: {to_addr_temp}")
                         print("---------")
 
-                        txid = self.key_wallets[key].send_tx_opreturn(send_amounts, to_addr)
+                        txid = self.key_wallets[key].send_tx_opreturn(send_amounts_temp, to_addr_temp)
                         tx_ids[key] = txid
                     else:
                         txid = self.key_wallets[key].send_tx_opreturn(to_addr, send_amounts)
