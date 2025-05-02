@@ -261,7 +261,7 @@ class WalletManager:
             print(amounts)
             print(self.key_wallets[key].get_address())
 
-            if len(self.key_wallets[key].get_utxos()) < 40:
+            if len(self.key_wallets[key].get_utxos()) < 20:
                 to_addrs.append(self.key_wallets[key].get_address())
                 amounts.append(2)
 
