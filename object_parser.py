@@ -162,23 +162,42 @@ class ObjectParser:
 
         if element.get('address', False):
             if not isinstance(actual_value, (bool)) and not actual_value == None:
-                if isinstance(actual_value, (int, dict, list)) or isinstance(actual_value, float):
+                if isinstance(actual_value, (int, dict)) or isinstance(actual_value, float):
                     actual_value = str(actual_value)
+                
+                if isinstance(actual_value, list):
+                    ret_val = []
+                    for val in actual_value:
+                        val = str(val)
+                        addr, pub = WalletManager.create_batch_address(val)
+                        ret_val.append(addr)
 
-            print("actual value:")
-            print(actual_value)     
-            addr, pub = WalletManager.create_batch_address(actual_value)
-            ret_val = addr
+                    ret_val = str(ret_val)
+                else:
+                    print("actual value:")
+                    print(actual_value)		
+                    addr, pub = WalletManager.create_batch_address(actual_value)
+                    ret_val = addr
 
         if element.get('reverse_address', False):
             if not isinstance(actual_value, (bool)) and not actual_value == None:
-                if isinstance(actual_value, (int, dict, list)) or isinstance(actual_value, float):
+                if isinstance(actual_value, (int, dict)) or isinstance(actual_value, float):
                     actual_value = str(actual_value)
+                
+                if isinstance(actual_value, list):
+                    ret_val = []
+                    for val in actual_value:
+                        val = str(val)
+                        addr, pub = WalletManager.create_batch_address(val)
+                        ret_val.append(addr)
+                        
+                    ret_val = str(ret_val)
+                else:
+                    print("actual value:")
+                    print(actual_value)     
+                    addr, pub = WalletManager.create_batch_address(actual_value)
+                    ret_val = addr
 
-            print("actual value:")
-            print(actual_value)     
-            addr, pub = WalletManager.create_batch_address(actual_value)
-            ret_val = addr
         elif not element.get('clear_text', False):
             if not isinstance(actual_value, (bool)) and not actual_value == None:
                 if isinstance(actual_value, (int, dict, list)) or isinstance(actual_value, float):
